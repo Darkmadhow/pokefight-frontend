@@ -1,0 +1,140 @@
+.card {
+  background-color: orange;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px auto;
+  border: 1px solid black;
+  border-radius: 5px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-name {
+  text-align: center;
+  color: #333;
+  font-family: "Gill Sans", sans-serif;
+}
+
+.pokemon-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    object-fit: cover;
+    overflow: visible;
+    width: 350px;
+    height: 200px;
+    margin: 0 auto 20px;
+    background-color: green;
+    border: 1px solid black;
+    border-radius: 5px;
+    max-width: 400px;
+    max-height: 400px;
+  }
+
+.pokemon-icons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.pokemon-icons {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+.pokemon-icons button {
+    margin: 0 5px;
+  }
+
+.lightning-icon {
+  background-color: yellow;
+}
+
+.fire-icon {
+  background-color: red;
+}
+
+.pokemon-details {
+  margin-top: 20px;
+  background-color: blue;
+}
+
+.legend {
+  font-weight: bold;
+}
+
+ul {
+  list-style-type: none;
+  padding: 10px;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* .PokemonProfile {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .PokemonProfile h2 {
+    font-size: 24px;
+    color: #333333;
+    margin-bottom: 10px;
+  }
+  
+  .PokemonProfile p {
+    font-size: 16px;
+    color: #666666;
+  }
+  
+  .PokemonProfile .pokemon-image {
+    width: 200px;
+    height: 200px;
+    margin-bottom: 20px;
+    background-color: #e6e6e6;
+  }
+  
+  .PokemonProfile .pokemon-details {
+    margin-bottom: 10px;
+    background-color: aqua;
+  }
+  
+  .PokemonProfile .pokemon-details span {
+    font-weight: bold;
+    background-color: beige;
+  }
+  
+  .PokemonProfile .pokemon-abilities {
+    margin-top: 10px;
+    background-color: #666666;
+  }
+  
+  .PokemonProfile .pokemon-abilities ul {
+    list-style-type: none;
+    padding: 0;
+    background-color: aliceblue;
+  }
+  
+  .PokemonProfile .pokemon-abilities li {
+    display: inline-block;
+    margin-right: 10px;
+    background-color: #e6e6e6;
+    padding: 5px 10px;
+    border-radius: 3px;
+  } */
