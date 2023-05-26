@@ -47,5 +47,4 @@
 .gameLog{
     background-color: lightgray;
     overflow-y: scroll;
-    flex: 0 0 auto;
 }
