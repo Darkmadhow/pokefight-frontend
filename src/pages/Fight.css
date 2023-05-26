@@ -1,5 +1,51 @@
+.fightPage{
+    display: flex;
+    flex-direction: column;
+}
+/*--------------- Battlefield Grid ---------------*/
 .battlefield{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    display:flex;
+    flex-wrap: wrap;
+    /* grid-template-columns: 1fr 1fr; */
+    background-color: lightyellow;
+    height: 66.6vh;
+}
+.myPokeStats, .enemyPokeStats{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 33.3vh;
+    width: 50%;
+}
+.enemyPokeSprite, .myPokeSprite{
+    width: 50%;
+    /* height: 100%; */
+    height: 33.3vh;
+}
+.battlefield img{
+    object-fit: cover;
+    overflow: visible;
+    height: 100%;
+    width: 100%;
+    max-width: 400px;
+    max-height: 400px;
+}
+
+/*--------------- Buttons for Player ---------------*/
+.playerActions{
+    display: flex;
+    column-gap: 0.5rem;
+    padding: 0.2rem 1rem;
+}
+.playerActions button{
+    flex-grow: 1;
+    padding: 0.5rem;
+}
+
+/*--------------- Game Log ---------------*/
+.gameLog{
+    background-color: lightgray;
+    overflow-y: scroll;
+    flex: 0 0 auto;
 }

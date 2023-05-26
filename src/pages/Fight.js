@@ -40,7 +40,10 @@ export default function Fight() {
   return (
     <div className="fightPage">
       <div className="battlefield">
-        <div className="enemyPokeStats">{enemyPokemon?.base.HP}</div>
+        <div className="enemyPokeStats">
+          <h4>{enemyPokemon?.name.english}</h4>
+          {enemyPokemon?.base.HP} HP
+        </div>
         <div className="enemyPokeSprite">
           <img
             src={enemyPokemonSprites?.front_default}
@@ -53,8 +56,17 @@ export default function Fight() {
             alt={myPokemon?.name.english}
           />
         </div>
-        <div className="myPokeStats">{myPokemon?.base.HP}</div>
+        <div className="myPokeStats">
+          <h4>{myPokemon?.name.english}</h4>
+          {myPokemon?.base.HP}HP
+        </div>
       </div>
+      <div className="playerActions">
+        <button>Attack!</button>
+        <button>Use Special!</button>
+        <button>Evade!</button>
+      </div>
+      <div className="gameLog"></div>
     </div>
   );
 }
