@@ -1,7 +1,7 @@
-const urlAPI = process.env.POKEMON_API_URL;
+const urlAPI = process.env.REACT_APP_POKEMON_API_URL;
 
 export async function getAllPokemon() {
-  const url = `${urlAPI}/pokemon`;
+  const url = `${urlAPI}pokemon`;
   try {
     let response = await fetch(url);
     if (!response.ok) throw new Error("Couldn't fetch Pokemon Data");
@@ -12,7 +12,7 @@ export async function getAllPokemon() {
 }
 
 export async function getPokemonById(id) {
-  const url = `${urlAPI}/pokemon/${id}`;
+  const url = `${urlAPI}pokemon/${id}`;
   try {
     let response = await fetch(url);
     if (!response.ok) throw new Error("Couldn't fetch Pokemon Data");
