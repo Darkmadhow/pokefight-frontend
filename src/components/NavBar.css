@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "Pokemon-Hollow";
+  src: local("Pokemon-Hollow"),
+    url("../fonts/Pokemon-Hollow.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.NavBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 7rem;
+  border-bottom: 1px solid black;
+}
+
+.pokefighth1 {
+  margin-left: 1rem;
+  font-family: Pokemon-Hollow;
+  font-weight: 500;
+  font-size: 3rem;
+}
+
+.ldboard {
+  margin-right: 1rem;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.ldboard:hover {
+  background-color: #333;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+a {
+  text-decoration: none;
+}
