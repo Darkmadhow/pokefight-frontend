@@ -1,7 +1,13 @@
 import "./NavBar.css";
+import { NavLink } from "react-router-dom";
 
-function NavBar() {
-  return <div>NavBar Section</div>;
+export default function NavBar() {
+  return (
+    <div className="NavBar">
+      <span className="pokefighth1">PokeFight</span>
+      <NavLink to="/leaderboard">
+        <span className="ldboard">Leaderboard</span>
+      </NavLink>
+    </div>
+  );
 }
-
-export default NavBar;
