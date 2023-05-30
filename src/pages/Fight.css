@@ -41,10 +41,15 @@
 .playerActions button{
     flex-grow: 1;
     padding: 0.5rem;
+    height: 2rem;
+}
+.playerActions .counter{
+    height: 2rem;
 }
 
 /*--------------- Game Log ---------------*/
 .gameLog{
     background-color: lightgray;
     overflow-y: scroll;
+    height: calc(33vh - 2.4rem);
 }
