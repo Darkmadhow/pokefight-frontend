@@ -1,6 +1,6 @@
-/* .all-pokemons-wrapper {
+.all-pokemons-wrapper {
   display: flex;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
 }
 
 .all-pokemons {
@@ -9,6 +9,6 @@
   padding-inline: 1.5rem;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
-  background-color: #1a1a1a;
+  /* background-color: #1a1a1a; */
   padding: 2rem 0rem 5rem 0rem;
-} */
+}
