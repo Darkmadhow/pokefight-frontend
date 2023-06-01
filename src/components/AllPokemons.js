@@ -18,18 +18,20 @@ export default function AllPokemons() {
       }`;
 
       if (searchQuery.trim() !== "") {
-        url = `https://pokeapi.co/api/v2/pokemon?limit=2000${searchQuery.toLowerCase()}`;
-      }
-
-      const response = await fetch(url);
-      const data = await response.json();
-
-      if (searchQuery.trim() === "") {
+        const response = await fetch(
+          "https://pokeapi.co/api/v2/pokemon?limit=2000"
+        );
+        const data = await response.json();
+        const filteredPokemons = data.results.filter((pokemon) =>
+          pokemon.name.startsWith(searchQuery.toLowerCase())
+        );
+        setPokemons(filteredPokemons);
+        setTotalPages(Math.ceil(filteredPokemons.length / 9));
+      } else {
+        const response = await fetch(url);
+        const data = await response.json();
         setPokemons(data.results);
         setTotalPages(Math.ceil(data.count / 9));
-      } else {
-        setPokemons([data]);
-        setTotalPages(1);
       }
     } catch (error) {
       console.log("Error fetching pokemons:", error);
@@ -50,6 +52,7 @@ export default function AllPokemons() {
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
+    setCurrentPage(1); // Reset to the first page when a new search query is entered
   };
 
   return (
