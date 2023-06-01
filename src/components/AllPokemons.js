@@ -121,7 +121,9 @@ export default function AllPokemons() {
         {pokemons.map((pokemon) => (
           <div className="pokemon-card" key={pokemon.name}>
             <img src={pokemon.imageUrl} alt={pokemon.name} />
-            <span>{pokemon.name}</span>
+            <span>
+              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            </span>
           </div>
         ))}
       </div>
