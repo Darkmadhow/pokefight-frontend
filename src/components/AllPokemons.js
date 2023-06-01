@@ -1,38 +1,65 @@
 import "./AllPokemons.css";
 import { useEffect, useState } from "react";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function AllPokemons() {
   const [pokemons, setPokemons] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedType, setSelectedType] = useState("");
 
   useEffect(() => {
     fetchPokemons();
-  }, [currentPage, searchQuery]);
+  }, [currentPage, searchQuery, selectedType]);
 
   const fetchPokemons = async () => {
     try {
-      let url = `https://pokeapi.co/api/v2/pokemon?limit=9&offset=${
-        (currentPage - 1) * 9
-      }`;
+      const limit = 9;
+      let url = "https://pokeapi.co/api/v2/pokemon?limit=2000";
+      let totalCount = 0;
+      let results = [];
 
-      if (searchQuery.trim() !== "") {
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=2000"
-        );
+      if (selectedType.trim() !== "") {
+        url = `https://pokeapi.co/api/v2/type/${selectedType.toLowerCase()}`;
+        const response = await fetch(url);
         const data = await response.json();
-        const filteredPokemons = data.results.filter((pokemon) =>
+        totalCount = data.pokemon.length;
+        results = data.pokemon.map((entry) => entry.pokemon);
+      } else if (searchQuery.trim() !== "") {
+        const response = await fetch(url);
+        const data = await response.json();
+        results = data.results.filter((pokemon) =>
           pokemon.name.startsWith(searchQuery.toLowerCase())
         );
-        setPokemons(filteredPokemons);
-        setTotalPages(Math.ceil(filteredPokemons.length / 9));
+        totalCount = results.length;
       } else {
         const response = await fetch(url);
         const data = await response.json();
-        setPokemons(data.results);
-        setTotalPages(Math.ceil(data.count / 9));
+        results = data.results;
+        totalCount = data.count;
       }
+
+      const paginatedResults = results.slice(
+        (currentPage - 1) * limit,
+        currentPage * limit
+      );
+
+      // Fetch and include the image URLs for each Pokémon
+      const pokemonsWithImages = await Promise.all(
+        paginatedResults.map(async (pokemon) => {
+          const response = await fetch(pokemon.url);
+          const data = await response.json();
+          return {
+            name: pokemon.name,
+            imageUrl: data.sprites.front_default,
+          };
+        })
+      );
+
+      setPokemons(pokemonsWithImages);
+      setTotalPages(Math.ceil(totalCount / limit));
     } catch (error) {
       console.log("Error fetching pokemons:", error);
     }
@@ -55,22 +82,49 @@ export default function AllPokemons() {
     setCurrentPage(1); // Reset to the first page when a new search query is entered
   };
 
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+    setCurrentPage(1);
+    setSearchQuery("");
+  };
+
   return (
     <div>
       <h1>All Pokemons</h1>
       <div>
+        <span className="filter-label">Filter:</span>
+        <select
+          className="pokeselect"
+          value={selectedType}
+          onChange={handleTypeChange}
+        >
+          <option value="">All Types</option>
+          <option value="fire">Fire</option>
+          <option value="water">Water</option>
+          <option value="grass">Grass</option>
+          {/* Add more type options as needed */}
+        </select>
         <input
+          className="pokesearch"
           type="text"
           placeholder="Search Pokemon"
           value={searchQuery}
           onChange={handleSearch}
         />
+        <FontAwesomeIcon
+          className="searchicon"
+          icon={faMagnifyingGlass}
+          size="2x"
+        />
       </div>
-      <ul>
+      <div className="pokemon-grid">
         {pokemons.map((pokemon) => (
-          <li key={pokemon.name}>{pokemon.name}</li>
+          <div className="pokemon-card" key={pokemon.name}>
+            <img src={pokemon.imageUrl} alt={pokemon.name} />
+            <span>{pokemon.name}</span>
+          </div>
         ))}
-      </ul>
+      </div>
       <div>
         <button
           className="ldboard"
