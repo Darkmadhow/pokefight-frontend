@@ -22,6 +22,29 @@ export async function getPokemonById(id) {
   }
 }
 
-export async function saveGame() {}
+export async function saveGame(fightResult) {
+  const url = `${urlAPI}leaderboard`;
+  try {
+    const requestOptions = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(fightResult),
+    };
+    fetch(url, requestOptions)
+      .then((response) => response.json())
+      .then((data) => console.log("Saved Fight Result! " + data));
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-export async function getLeaderboard() {}
+export async function getLeaderboard() {
+  const url = `${urlAPI}leaderboard`;
+  try {
+    let response = await fetch(url);
+    if (!response.ok) throw new Error("Couldn't fetch Pokemon Data");
+    return await response.json();
+  } catch (error) {
+    console.log(error);
+  }
+}

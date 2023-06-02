@@ -1,9 +1,10 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getPokemonById } from "../utils/PokeAPI";
 import { useEffect, useRef, useState } from "react";
 import getPokemonImages from "../utils/ImageAPI";
 import "./Fight.css";
 import getStrengthsAndWeaknesses from "../utils/TypeHelper";
+import { saveGame } from "../utils/PokeAPI";
 
 export default function Fight() {
   // GAME VARIABLES: My Pokemon, Enemy Pokemon, Round Counter, gameLog
@@ -17,7 +18,29 @@ export default function Fight() {
   });
   const [round, setRound] = useState(1);
   const [gameLog, setGameLog] = useState("");
+  const [gameState, setGameState] = useState({
+    fighting: false,
+    winner: undefined,
+    loser: undefined,
+  });
   const bottom = useRef(null);
+  const navigate = useNavigate();
+
+  const handleClickResults = () => {
+    const { winner, loser } = gameState;
+    const victory = gameState.winner.name === myPokemon.name.english;
+    const score = victory ? 1100 - 100 * round : 0 - round * 100;
+    saveGame({ winner, loser, victory, round, score });
+    navigate("/result", {
+      state: {
+        winner,
+        loser,
+        round,
+        victory,
+        score,
+      },
+    });
+  };
 
   //get Pokemon IDs
   const { id } = useParams();
@@ -67,6 +90,7 @@ export default function Fight() {
     setGameLog(
       (prev) => prev + `You encounter a wild ${enemyPokemon.name.english}.\n`
     );
+    setGameState({ fighting: true, winner: undefined, loser: undefined });
   }
 
   function playerAttack() {
@@ -77,7 +101,22 @@ export default function Fight() {
       : myPokemon.base.Attack - enemyPokemon.base.Defense;
     //if pokemon is too weak, deal minimal damage
     if (dmg <= 0) dmg = 2;
-    const HP = enemyPokemon.base.HP - dmg;
+    let HP = enemyPokemon.base.HP - dmg;
+    //if the target dies, don't overkill, end the fight
+    if (HP <= 0) {
+      HP = 0;
+      setGameState({
+        fighting: false,
+        winner: {
+          name: myPokemon.name.english,
+          image: myPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+        loser: {
+          name: enemyPokemon.name.english,
+          image: enemyPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+      });
+    }
     const base = { ...enemyPokemon.base, HP };
     //re-render to advance gamestate
     setEnemyPokemon({
@@ -101,7 +140,22 @@ export default function Fight() {
       : enemyPokemon.base.Attack - myPokemon.base.Defense;
     //if pokemon is too weak, deal minimal damage
     if (dmg <= 0) dmg = 2;
-    const HP = myPokemon.base.HP - dmg;
+    let HP = myPokemon.base.HP - dmg;
+    //if the target dies, don't overkill, end the fight
+    if (HP <= 0) {
+      HP = 0;
+      setGameState({
+        fighting: false,
+        winner: {
+          name: enemyPokemon.name.english,
+          image: enemyPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+        loser: {
+          name: myPokemon.name.english,
+          image: myPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+      });
+    }
     const base = { ...myPokemon.base, HP };
     //re-render to advance gamestate
     setMyPokemon({
@@ -127,7 +181,22 @@ export default function Fight() {
         enemyPokemon.base["Sp. Defense"];
     //if pokemon is too weak, deal minimal damage
     if (specialdmg <= 0) specialdmg = 2;
-    const HP = enemyPokemon.base.HP - specialdmg;
+    let HP = enemyPokemon.base.HP - specialdmg;
+    //if the target dies, don't overkill, end the fight
+    if (HP <= 0) {
+      HP = 0;
+      setGameState({
+        fighting: false,
+        winner: {
+          name: myPokemon.name.english,
+          image: myPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+        loser: {
+          name: enemyPokemon.name.english,
+          image: enemyPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+      });
+    }
     const base = { ...enemyPokemon.base, HP };
     //re-render to advance gamestate
     setEnemyPokemon({
@@ -164,7 +233,22 @@ export default function Fight() {
         myPokemon.base["Sp. Defense"];
     //if pokemon is too weak, deal minimal damage
     if (specialdmg <= 0) specialdmg = 2;
-    const HP = myPokemon.base.HP - specialdmg;
+    let HP = myPokemon.base.HP - specialdmg;
+    //if the target dies, don't overkill, end the fight
+    if (HP <= 0) {
+      HP = 0;
+      setGameState({
+        fighting: false,
+        winner: {
+          name: enemyPokemon.name.english,
+          image: enemyPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+        loser: {
+          name: myPokemon.name.english,
+          image: myPokemonSprites?.other["official-artwork"]?.front_default,
+        },
+      });
+    }
     const base = { ...myPokemon.base, HP };
     //re-render to advance gamestate
     setMyPokemon({
@@ -202,10 +286,10 @@ export default function Fight() {
     //decide who goes first and fight!
     if (myPokemon.base.Speed > enemyPokemon.base.Speed) {
       playerMove();
-      enemyMove();
+      if (enemyPokemon.base.HP > 0) enemyMove();
     } else {
       enemyMove();
-      playerMove();
+      if (myPokemon.base.HP > 0) playerMove();
     }
     //advance round counter
     setRound((prev) => prev + 1);
@@ -233,13 +317,19 @@ export default function Fight() {
         </div>
         <div className="enemyPokeSprite">
           <img
-            src={enemyPokemonSprites?.front_default}
+            src={
+              enemyPokemonSprites?.front_default ||
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+            }
             alt={enemyPokemon?.name.english}
           />
         </div>
         <div className="myPokeSprite">
           <img
-            src={myPokemonSprites?.back_default}
+            src={
+              myPokemonSprites?.back_default ||
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png"
+            }
             alt={myPokemon?.name.english}
           />
         </div>
@@ -248,32 +338,42 @@ export default function Fight() {
           {myPokemon?.base.HP}HP
         </div>
       </div>
-      <div className="playerActions">
-        <button
-          onClick={
-            enemyPokemon
-              ? () => {
-                  fightRound(0);
-                }
-              : null
-          }
-        >
-          Attack!
-        </button>
-        <button
-          onClick={
-            enemyPokemon
-              ? () => {
-                  fightRound(1);
-                }
-              : null
-          }
-        >
-          Use Special!
-        </button>
-        <div className="counter">Round: {round}</div>
-        {/* <button onClick={enemyPokemon ? playerEvade : null}>Evade!</button> */}
-      </div>
+      {gameState.fighting ? ( //If pokemon are loaded and ready, display actionbuttons to control pokemon
+        <div className="playerActions">
+          <button
+            onClick={
+              enemyPokemon
+                ? () => {
+                    fightRound(0);
+                  }
+                : null
+            }
+          >
+            Attack!
+          </button>
+          <button
+            onClick={
+              enemyPokemon
+                ? () => {
+                    fightRound(1);
+                  }
+                : null
+            }
+          >
+            Use Special!
+          </button>
+          <div className="counter">Round: {round}</div>
+          {/* <button onClick={enemyPokemon ? playerEvade : null}>Evade!</button> */}
+        </div>
+      ) : (
+        //If pokemon are not loaded or the fight is over, display next button
+        <div className="playerActions">
+          <button onClick={enemyPokemon ? handleClickResults : null}>
+            View Result
+          </button>
+        </div>
+      )}
+
       <div className="gameLog">
         <p dangerouslySetInnerHTML={{ __html: replaceWithBr() }} />
         <div ref={bottom} />
