@@ -89,8 +89,8 @@ export default function AllPokemons() {
   };
 
   return (
-    <div>
-      <h1>All Pokemons</h1>
+    <div className="all-pokemons-wrapper">
+      <h1>Pokémon</h1>
       <div>
         <span className="filter-label">Filter:</span>
         <select
@@ -129,7 +129,7 @@ export default function AllPokemons() {
       </div>
       <div>
         <button
-          className="ldboard"
+          className="pagebutton"
           style={{ cursor: "pointer" }}
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
@@ -137,7 +137,7 @@ export default function AllPokemons() {
           Previous
         </button>
         <button
-          className="ldboard"
+          className="pagebutton"
           style={{ cursor: "pointer" }}
           onClick={handleNextPage}
           disabled={currentPage === totalPages}
