@@ -1,0 +1,25 @@
+.fightRecord{
+    display: flex;
+    flex-direction: row;
+    column-gap: 1rem;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.fightRecord img {
+    height: 64px;
+    width: 64px;
+}
+
+.fightResult img {
+    height: 32px;
+    width: 32px;
+}
+
+.fightResultText h3, .fightResultText h4{
+    display: inline;
+}
+.fightResultText h4{
+    margin: 0 2rem;
+}

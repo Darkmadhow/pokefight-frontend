@@ -1,0 +1,28 @@
+.result img{
+    width: min(200px,20vh);
+    height: min(200px,20vh);
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    margin: 2rem;
+}
+
+@media (orientation: landscape) {
+    .result{
+        flex-direction: row;
+    }
+    .result p{
+        margin: 0 2rem;
+    }
+    .result img{
+        width: 200px;
+        height: 200px;
+    }
+}

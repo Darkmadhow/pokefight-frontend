@@ -6,11 +6,23 @@ export default async function getPokemonImages(name) {
     const lowercaseName = name.toLowerCase();
     const escapedName = lowercaseName.replace(" ", "-");
     const response = await fetch(`${externalApiUrl}${escapedName}`);
-    if (!response.ok) return null;
+    if (!response.ok) throw new Error("No image available");
     const data = await response.json();
     return data.sprites;
   } catch (err) {
     console.log(err.message);
-    return null;
+    const fallbackSprites = {
+      front_default:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+      back_default:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/132.png",
+      other: {
+        "official-artwork": {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/132.png",
+        },
+      },
+    };
+    return fallbackSprites;
   }
 }

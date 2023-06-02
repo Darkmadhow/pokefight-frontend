@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Pokemon-Hollow";
+  src: local("Pokemon-Hollow"),
+    url("./fonts/Pokemon-Hollow.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
 .App {
   text-align: center;
 }
