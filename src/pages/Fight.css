@@ -8,6 +8,12 @@
     flex-wrap: wrap;
     /* grid-template-columns: 1fr 1fr; */
     background-color: lightyellow;
+    background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    #ccc5 0.25rem,
+    transparent 0.5rem
+  );
     height: 66.6vh;
 }
 .myPokeStats, .enemyPokeStats{
