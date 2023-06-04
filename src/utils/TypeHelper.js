@@ -1,3 +1,22 @@
+import bugIcon from "../icons/Bug.png";
+import darkIcon from "../icons/Dark.png";
+import dragonIcon from "../icons/Dragon.png";
+import electricIcon from "../icons/Electric.png";
+import fairyIcon from "../icons/Fairy.png";
+import fightingIcon from "../icons/Fighting.png";
+import fireIcon from "../icons/Fire.png";
+import flyingIcon from "../icons/Flying.png";
+import ghostIcon from "../icons/Ghost.png";
+import grassIcon from "../icons/Grass.png";
+import groundIcon from "../icons/Ground.png";
+import iceIcon from "../icons/Ice.png";
+import normalIcon from "../icons/Normal.png";
+import poisonIcon from "../icons/Poison.png";
+import psychicIcon from "../icons/Psychic.png";
+import rockIcon from "../icons/Rock.png";
+import steelIcon from "../icons/Steel.png";
+import waterIcon from "../icons/Water.png";
+
 const strengths = {
   Bug: ["Grass", "Dark", "Psychic"],
   Dark: ["Ghost", "Psychic"],
@@ -39,6 +58,49 @@ const weaknesses = {
   Water: ["Electric", "Grass"],
 };
 
+export function getIconByType(type) {
+  switch (type) {
+    case "Bug":
+      return bugIcon;
+    case "Dark":
+      return darkIcon;
+    case "Dragon":
+      return dragonIcon;
+    case "Electric":
+      return electricIcon;
+    case "Fairy":
+      return fairyIcon;
+    case "Fighting":
+      return fightingIcon;
+    case "Fire":
+      return fireIcon;
+    case "Flying":
+      return flyingIcon;
+    case "Ghost":
+      return ghostIcon;
+    case "Grass":
+      return grassIcon;
+    case "Ground":
+      return groundIcon;
+    case "Ice":
+      return iceIcon;
+    case "Normal":
+      return normalIcon;
+    case "Poison":
+      return poisonIcon;
+    case "Psychic":
+      return psychicIcon;
+    case "Rock":
+      return rockIcon;
+    case "Steel":
+      return steelIcon;
+    case "Water":
+      return waterIcon;
+    default:
+      return normalIcon;
+  }
+}
+
 export default function getStrengthsAndWeaknesses(types) {
   //get strengths for all the types
   let myStrengths = types.map((type) => strengths[type]);
@@ -60,4 +122,47 @@ export default function getStrengthsAndWeaknesses(types) {
 
   //return two String arrays with types which we take half and double damage from
   return [finalStrengths, finalWeaknesses];
+}
+
+export function getColorByType(type) {
+  switch (type) {
+    case "Bug":
+      return { "background-color": "limegreen" };
+    case "Dark":
+      return { "background-color": "purple" };
+    case "Dragon":
+      return { "background-color": "orangered" };
+    case "Electric":
+      return { "background-color": "yellow" };
+    case "Fairy":
+      return { "background-color": "deeppink" };
+    case "Fighting":
+      return { "background-color": "saddlebrown" };
+    case "Fire":
+      return { "background-color": "firebrick" };
+    case "Flying":
+      return { "background-color": "darkturquoise" };
+    case "Ghost":
+      return { "background-color": "darkviolet" };
+    case "Grass":
+      return { "background-color": "lawngreen" };
+    case "Ground":
+      return { "background-color": "chocolate" };
+    case "Ice":
+      return { "background-color": "aqua" };
+    case "Normal":
+      return { "background-color": "lightgray" };
+    case "Poison":
+      return { "background-color": "blueviolet" };
+    case "Psychic":
+      return { "background-color": "fuchsia" };
+    case "Rock":
+      return { "background-color": "peru" };
+    case "Steel":
+      return { "background-color": "silver" };
+    case "Water":
+      return { "background-color": "deepskyblue" };
+    default:
+      return { "background-color": "chocolate" };
+  }
 }
