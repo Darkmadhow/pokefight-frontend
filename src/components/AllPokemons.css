@@ -58,6 +58,8 @@
 .pokemon-card span {
   font-size: 1.3rem;
   letter-spacing: 2px;
+  text-decoration: none;
+  color: black;
 }
 
 .pokesearch {
