@@ -2,6 +2,7 @@ import "./AllPokemons.css";
 import { useEffect, useState } from "react";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link } from "react-router-dom";
 
 export default function AllPokemons() {
   const [pokemons, setPokemons] = useState([]);
@@ -52,6 +53,7 @@ export default function AllPokemons() {
           const response = await fetch(pokemon.url);
           const data = await response.json();
           return {
+            id: data.id,
             name: pokemon.name,
             imageUrl: data.sprites.front_default,
           };
@@ -119,12 +121,16 @@ export default function AllPokemons() {
       </div>
       <div className="pokemon-grid">
         {pokemons.map((pokemon) => (
-          <div className="pokemon-card" key={pokemon.name}>
+          <Link
+            to={`/pokemon/${pokemon.id}`}
+            key={pokemon.id}
+            className="pokemon-card"
+          >
             <img src={pokemon.imageUrl} alt={pokemon.name} />
             <span>
               {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
             </span>
-          </div>
+          </Link>
         ))}
       </div>
       <div>
