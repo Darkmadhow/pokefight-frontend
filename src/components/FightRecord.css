@@ -1,13 +1,16 @@
+.fightRecordWrapper{
+    background-color: aliceblue;
+    border-radius: 1rem;
+    border: 1px solid #3466AF;
+    margin: 0 5% 2rem 5%;
+}
+
 .fightRecord{
     display: flex;
     flex-direction: row;
     column-gap: 1rem;
     justify-content: center;
     align-items: center;
-    margin: 0 5% 2rem 5%;
-    background-color: aliceblue;
-    border-radius: 1rem;
-    border: 1px solid #3466AF;
     height: 85px;
     padding: 0 0.5rem;
 }
