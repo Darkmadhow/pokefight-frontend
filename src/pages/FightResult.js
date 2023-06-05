@@ -8,30 +8,32 @@ export default function FightResult(props) {
 
   return (
     <div className="resultPage">
-      {victory ? (
-        <div className="resultConditional">
-          <div className="crownContainer">
-            <img src="Victory.png" alt="Victory" />
+      <div className="resultWrapper">
+        {victory ? (
+          <div className="resultConditional">
+            <div className="crownContainer">
+              <img src="Victory.png" alt="Victory" />
+            </div>
+            <h1>Victory!</h1>
           </div>
-          <h1>Victory!</h1>
+        ) : (
+          <div className="resultConditional">
+            <h1>Defeat</h1>
+          </div>
+        )}
+        <div className="result">
+          <img src={winner.image} alt={winner.name} />
+          <h3>{winner.name}</h3>
+          <p>defeated</p>
+          <h3>{loser.name}</h3>
+          <img src={loser.image} alt={loser.name} />
         </div>
-      ) : (
-        <div className="resultConditional">
-          <h1>Defeat</h1>
-        </div>
-      )}
-      <div className="result">
-        <img src={winner.image} alt={winner.name} />
-        <h3>{winner.name}</h3>
-        <p>defeated</p>
-        <h3>{loser.name}</h3>
-        <img src={loser.image} alt={loser.name} />
+        <p>in {round - 1} rounds.</p>
+        <h4>Score: {score}</h4>
+        <Link to="/">
+          <button>Return to Pokedex</button>
+        </Link>
       </div>
-      <p>in {round - 1} rounds.</p>
-      <h4>Score: {score}</h4>
-      <Link to="/">
-        <button>Return to Pokedex</button>
-      </Link>
     </div>
   );
 }

@@ -22,8 +22,10 @@ export default function Leaderboard() {
           <span className="linkHome">Back</span>
         </NavLink>
       </nav>
-      <h2>Fight History</h2>
       <div className="leaderboard">
+        <div className="leaderboardTitle">
+          <h2>Fight History</h2>
+        </div>
         <ul>
           {records?.map((record) => (
             <FightRecord fightInfo={record} key={record.winner.name} />

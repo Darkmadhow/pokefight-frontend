@@ -127,42 +127,42 @@ export default function getStrengthsAndWeaknesses(types) {
 export function getColorByType(type) {
   switch (type) {
     case "Bug":
-      return { "background-color": "limegreen" };
+      return { backgroundColor: "limegreen" };
     case "Dark":
-      return { "background-color": "purple" };
+      return { backgroundColor: "purple" };
     case "Dragon":
-      return { "background-color": "orangered" };
+      return { backgroundColor: "orangered" };
     case "Electric":
-      return { "background-color": "yellow" };
+      return { backgroundColor: "yellow" };
     case "Fairy":
-      return { "background-color": "deeppink" };
+      return { backgroundColor: "deeppink" };
     case "Fighting":
-      return { "background-color": "saddlebrown" };
+      return { backgroundColor: "saddlebrown" };
     case "Fire":
-      return { "background-color": "firebrick" };
+      return { backgroundColor: "firebrick" };
     case "Flying":
-      return { "background-color": "darkturquoise" };
+      return { backgroundColor: "darkturquoise" };
     case "Ghost":
-      return { "background-color": "darkviolet" };
+      return { backgroundColor: "darkviolet" };
     case "Grass":
-      return { "background-color": "lawngreen" };
+      return { backgroundColor: "lawngreen" };
     case "Ground":
-      return { "background-color": "chocolate" };
+      return { backgroundColor: "chocolate" };
     case "Ice":
-      return { "background-color": "aqua" };
+      return { backgroundColor: "aqua" };
     case "Normal":
-      return { "background-color": "lightgray" };
+      return { backgroundColor: "lightgray" };
     case "Poison":
-      return { "background-color": "blueviolet" };
+      return { backgroundColor: "blueviolet" };
     case "Psychic":
-      return { "background-color": "fuchsia" };
+      return { backgroundColor: "fuchsia" };
     case "Rock":
-      return { "background-color": "peru" };
+      return { backgroundColor: "peru" };
     case "Steel":
-      return { "background-color": "silver" };
+      return { backgroundColor: "silver" };
     case "Water":
-      return { "background-color": "deepskyblue" };
+      return { backgroundColor: "deepskyblue" };
     default:
-      return { "background-color": "chocolate" };
+      return { backgroundColor: "chocolate" };
   }
 }

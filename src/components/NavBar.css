@@ -12,13 +12,16 @@
   align-items: center;
   height: 7rem;
   border-bottom: 1px solid black;
+  background-color: #E4000F;
 }
 
 .pokefighth1 {
   margin-left: 1rem;
-  font-family: Pokemon-Hollow;
+  font-family: Pokemon-Solid;
+  color: #FFCB05;
   font-weight: 500;
   font-size: 3rem;
+  -webkit-text-stroke: 3px #3466AF;
 }
 
 .ldboard {

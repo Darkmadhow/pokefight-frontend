@@ -1,32 +1,51 @@
 .leaderboardNav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    height: 7rem;
-    border-bottom: 1px solid black;
-}
-  
-.linkHome {
-    margin-right: 1rem;
-    padding: 5px 10px;
-    border: 1px solid black;
-    border-radius: 10px;
-    background-color: #f2f2f2;
-    color: #333;
-    font-size: 18px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
-}
-  
-.linkHome:hover {
-    background-color: #333;
-    color: #fff;
-    transform: scale(1.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 7rem;
+  border-bottom: 1px solid black;
+  background-color: #e4000f;
 }
 
-.leaderboardPage h2 {
-    margin: 2rem;
+.linkHome {
+  margin-right: 1rem;
+  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.linkHome:hover {
+  background-color: #333;
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.leaderboard {
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    #ccc5 0.25rem,
+    transparent 0.5rem
+  );
+  padding-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.leaderboardTitle {
+  padding: 1rem 2rem;
+  background-color: white;
+  width: fit-content;
+  height: fit-content;
+  align-self: center;
+  border-radius: 1rem;
+  border: 2px solid gray;
+  margin-bottom: 2rem;
 }

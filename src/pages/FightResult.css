@@ -1,3 +1,20 @@
+.resultPage{
+    background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        #ccc5 0.25rem,
+        transparent 0.5rem
+      );
+      min-height: 100vh;
+      padding: 2rem;
+}
+.resultWrapper {
+    background-color: aliceblue;
+    border-radius: 2rem;
+    border: 2px #3466AF solid;
+    padding: 1rem;
+}
+
 .result img{
     width: min(200px,20vh);
     height: min(200px,20vh);
@@ -30,7 +47,7 @@
     transform: scale(1.05);
   }
 
-@media (orientation: landscape) {
+@media (orientation: landscape) and (min-width: 730px) {
     .result{
         flex-direction: row;
     }

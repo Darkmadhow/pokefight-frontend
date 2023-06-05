@@ -130,6 +130,7 @@ export default function Fight() {
           myPokemon.name.english
         } attacks and deals ${dmg} Damage.\n`
     );
+    return HP;
   }
 
   function enemyAttack() {
@@ -169,6 +170,7 @@ export default function Fight() {
           enemyPokemon.name.english
         } attacks and deals ${dmg} Damage.\n`
     );
+    return HP;
   }
 
   function playerSpecial() {
@@ -221,6 +223,7 @@ export default function Fight() {
           myPokemon.name.english
         } uses its Special.${effectiveness} It deals ${specialdmg} Damage.\n`
     );
+    return HP;
   }
 
   function enemySpecial() {
@@ -273,6 +276,7 @@ export default function Fight() {
           enemyPokemon.name.english
         } uses its Special.${effectiveness} It deals ${specialdmg} Damage.\n`
     );
+    return HP;
   }
 
   // function playerEvade() {}
@@ -285,11 +289,11 @@ export default function Fight() {
       Math.floor(Math.random() * 3) < 2 ? enemyAttack : enemySpecial;
     //decide who goes first and fight!
     if (myPokemon.base.Speed > enemyPokemon.base.Speed) {
-      playerMove();
-      if (enemyPokemon.base.HP > 0) enemyMove();
+      const remainHP = playerMove();
+      if (remainHP > 0) enemyMove();
     } else {
-      enemyMove();
-      if (myPokemon.base.HP > 0) playerMove();
+      const remainHP = enemyMove();
+      if (remainHP > 0) playerMove();
     }
     //advance round counter
     setRound((prev) => prev + 1);

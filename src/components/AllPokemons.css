@@ -9,6 +9,12 @@
 .all-pokemons-wrapper {
   padding-top: 2rem;
   padding-bottom: 2rem;
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    #ccc5 0.25rem,
+    transparent 0.5rem
+  );
 }
 
 .all-pokemons-wrapper h1 {
