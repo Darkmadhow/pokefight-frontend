@@ -52,103 +52,108 @@ function PokemonProfile() {
   };
 
   return (
-    <div className="card">
-      <div className="cardBody" style={getColorByType(pokemon?.type[0])}>
-        <div className="pokemonHeader">
-          <h2 className="pokemon-name">{pokemon?.name.english}</h2>
-          <div className="pokemonTypeIcons">
-            {typeIcons.map((icon, index) => (
-              <img src={icon} alt={pokemon?.type[index]} />
+    <div className="pokemonProfilePage">
+      <div className="card">
+        <div className="cardBody" style={getColorByType(pokemon?.type[0])}>
+          <div className="pokemonHeader">
+            <h2 className="pokemon-name">{pokemon?.name.english}</h2>
+            <div className="pokemonTypeIcons">
+              {typeIcons.map((icon, index) => (
+                <img src={icon} alt={pokemon?.type[index]} />
+              ))}
+            </div>
+          </div>
+          <div
+            className="pokemon-image"
+            style={getColorByType(pokemon?.type[1])}
+          >
+            {pokemonImages && (
+              <img
+                src={
+                  pokemonImages?.other["official-artwork"]?.front_default ||
+                  pokemonImages?.front_default
+                }
+                alt={pokemon?.name.english}
+              />
+            )}
+          </div>
+          <div className="pokemon-types">
+            {pokemon?.type.map((type) => (
+              <h4>{type}</h4>
             ))}
-          </div>
-        </div>
-        <div className="pokemon-image" style={getColorByType(pokemon?.type[1])}>
-          {pokemonImages && (
-            <img
-              src={
-                pokemonImages?.other["official-artwork"]?.front_default ||
-                pokemonImages?.front_default
-              }
-              alt={pokemon?.name.english}
-            />
-          )}
-        </div>
-        <div className="pokemon-types">
-          {pokemon?.type.map((type) => (
-            <h4>{type}</h4>
-          ))}
-          <span className="legend" style={{ visibility: displayLegend }}>
-            This pokemons types - primary and secondary
-          </span>
-        </div>
-        <div className="pokemon-details">
-          <p className="strengths">
-            <b>Strengths: </b>
-            {pokemon
-              ? getStrengthsAndWeaknesses(pokemon.type)[0].toString()
-              : ""}
             <span className="legend" style={{ visibility: displayLegend }}>
-              Takes halved damage from these types
+              This pokemons types - primary and secondary
             </span>
-          </p>
-          <div className="pokemonStats">
-            <div className="stat">
-              <img src={healthIcon} alt="HP" />
-              <span>{pokemon?.base.HP}</span>
-              <span className="legend" style={{ visibility: displayLegend }}>
-                Health
-              </span>
-            </div>
-            <div className="stat">
-              <img src={speedIcon} alt="Spd" />
-              <span>{pokemon?.base.Speed}</span>
-              <span className="legend" style={{ visibility: displayLegend }}>
-                Speed
-              </span>
-            </div>
-            <div className="stat">
-              <img src={attackIcon} alt="Atk" />
-              <span>{pokemon?.base.Attack}</span>
-              <span className="legend" style={{ visibility: displayLegend }}>
-                Attack
-              </span>
-            </div>
-            <div className="stat">
-              <img src={defenseIcon} alt="Def" />
-              <span>{pokemon?.base.Defense}</span>
-              <span className="legend" style={{ visibility: displayLegend }}>
-                Defense
-              </span>
-            </div>
-            <div className="stat">
-              <img src={specialIcon} alt="Spc" />
-              <span>{pokemon?.base["Sp. Attack"]}</span>
-              <span className="legend" style={{ visibility: displayLegend }}>
-                Special Attack
-              </span>
-            </div>
-            <div className="stat">
-              <img src={specialdefenseIcon} alt="Spc Def" />
-              <span>{pokemon?.base["Sp. Defense"]}</span>
-              <span className="legend" style={{ visibility: displayLegend }}>
-                Special Defense
-              </span>
-            </div>
           </div>
-          <p className="weaknesses">
-            <b>Weaknesses: </b>
-            {pokemon
-              ? getStrengthsAndWeaknesses(pokemon.type)[1].toString()
-              : ""}
-            <span className="legend" style={{ visibility: displayLegend }}>
-              Takes double damage from these types
-            </span>
-          </p>
-        </div>
-        <div className="buttonBox">
-          <button onClick={handleReturn}>←</button>
-          <button onClick={handleChoose}>I choose you!</button>
-          <button onClick={toggleLegend}>?</button>
+          <div className="pokemon-details">
+            <p className="strengths">
+              <b>Strengths: </b>
+              {pokemon
+                ? getStrengthsAndWeaknesses(pokemon.type)[0].toString()
+                : ""}
+              <span className="legend" style={{ visibility: displayLegend }}>
+                Takes halved damage from these types
+              </span>
+            </p>
+            <div className="pokemonStats">
+              <div className="stat">
+                <img src={healthIcon} alt="HP" />
+                <span>{pokemon?.base.HP}</span>
+                <span className="legend" style={{ visibility: displayLegend }}>
+                  Health
+                </span>
+              </div>
+              <div className="stat">
+                <img src={speedIcon} alt="Spd" />
+                <span>{pokemon?.base.Speed}</span>
+                <span className="legend" style={{ visibility: displayLegend }}>
+                  Speed
+                </span>
+              </div>
+              <div className="stat">
+                <img src={attackIcon} alt="Atk" />
+                <span>{pokemon?.base.Attack}</span>
+                <span className="legend" style={{ visibility: displayLegend }}>
+                  Attack
+                </span>
+              </div>
+              <div className="stat">
+                <img src={defenseIcon} alt="Def" />
+                <span>{pokemon?.base.Defense}</span>
+                <span className="legend" style={{ visibility: displayLegend }}>
+                  Defense
+                </span>
+              </div>
+              <div className="stat">
+                <img src={specialIcon} alt="Spc" />
+                <span>{pokemon?.base["Sp. Attack"]}</span>
+                <span className="legend" style={{ visibility: displayLegend }}>
+                  Special Attack
+                </span>
+              </div>
+              <div className="stat">
+                <img src={specialdefenseIcon} alt="Spc Def" />
+                <span>{pokemon?.base["Sp. Defense"]}</span>
+                <span className="legend" style={{ visibility: displayLegend }}>
+                  Special Defense
+                </span>
+              </div>
+            </div>
+            <p className="weaknesses">
+              <b>Weaknesses: </b>
+              {pokemon
+                ? getStrengthsAndWeaknesses(pokemon.type)[1].toString()
+                : ""}
+              <span className="legend" style={{ visibility: displayLegend }}>
+                Takes double damage from these types
+              </span>
+            </p>
+          </div>
+          <div className="buttonBox">
+            <button onClick={handleReturn}>←</button>
+            <button onClick={handleChoose}>I choose you!</button>
+            <button onClick={toggleLegend}>?</button>
+          </div>
         </div>
       </div>
     </div>
