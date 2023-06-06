@@ -18,7 +18,7 @@ export default function AllPokemons() {
   const fetchPokemons = async () => {
     try {
       const limit = 9;
-      let url = "https://pokeapi.co/api/v2/pokemon?limit=2000";
+      let url = "https://pokeapi.co/api/v2/pokemon?limit=809";
       let totalCount = 0;
       let results = [];
 
