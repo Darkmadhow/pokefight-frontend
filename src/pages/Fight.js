@@ -47,6 +47,7 @@ export default function Fight() {
   const rndID = Math.floor(
     Math.random() * process.env.REACT_APP_POKEMON_MAX + 1
   );
+  const baseDmg = 35;
 
   async function loadPokemon() {
     //load my Pokemon info
@@ -95,10 +96,10 @@ export default function Fight() {
 
   function playerAttack() {
     //calculate critchance and damage
-    const crit = Math.random() < myPokemon.base.Speed / 200;
-    let dmg = crit
-      ? myPokemon.base.Attack * 2 - enemyPokemon.base.Defense
-      : myPokemon.base.Attack - enemyPokemon.base.Defense;
+    const crit = Math.random() < myPokemon.base.Speed / 300 ? 2 : 1;
+    let dmg = Math.round(
+      ((baseDmg * myPokemon.base.Attack) / enemyPokemon.base.Defense) * crit
+    );
     //if pokemon is too weak, deal minimal damage
     if (dmg <= 0) dmg = 2;
     let HP = enemyPokemon.base.HP - dmg;
@@ -126,7 +127,7 @@ export default function Fight() {
     setGameLog(
       (prev) =>
         prev +
-        `${crit ? "Critical Hit! " : ""}${
+        `${crit > 1 ? "Critical Hit! " : ""}${
           myPokemon.name.english
         } attacks and deals ${dmg} Damage.\n`
     );
@@ -135,10 +136,10 @@ export default function Fight() {
 
   function enemyAttack() {
     //calculate critchance and damage
-    const crit = Math.random() < enemyPokemon.base.Speed / 200;
-    let dmg = crit
-      ? enemyPokemon.base.Attack * 2 - myPokemon.base.Defense
-      : enemyPokemon.base.Attack - myPokemon.base.Defense;
+    const crit = Math.random() < enemyPokemon.base.Speed / 300 ? 2 : 1;
+    let dmg = Math.round(
+      ((baseDmg * enemyPokemon.base.Attack) / myPokemon.base.Defense) * crit
+    );
     //if pokemon is too weak, deal minimal damage
     if (dmg <= 0) dmg = 2;
     let HP = myPokemon.base.HP - dmg;
@@ -166,7 +167,7 @@ export default function Fight() {
     setGameLog(
       (prev) =>
         prev +
-        `${crit ? "Critical Hit! " : ""}${
+        `${crit > 1 ? "Critical Hit! " : ""}${
           enemyPokemon.name.english
         } attacks and deals ${dmg} Damage.\n`
     );
@@ -175,12 +176,12 @@ export default function Fight() {
 
   function playerSpecial() {
     //calculate critchance and damage
-    const crit = Math.random() < myPokemon.base.Speed / 200;
-    let specialdmg = crit
-      ? myPokemon.base["Sp. Attack"] * myPokemon.specialMult * 2 -
-        enemyPokemon.base["Sp. Defense"]
-      : myPokemon.base["Sp. Attack"] * myPokemon.specialMult -
-        enemyPokemon.base["Sp. Defense"];
+    const crit = Math.random() < myPokemon.base.Speed / 300 ? 2 : 1;
+    let specialdmg = Math.round(
+      ((baseDmg * myPokemon.base["Sp. Attack"]) /
+        enemyPokemon.base["Sp. Defense"]) *
+        crit
+    );
     //if pokemon is too weak, deal minimal damage
     if (specialdmg <= 0) specialdmg = 2;
     let HP = enemyPokemon.base.HP - specialdmg;
@@ -219,7 +220,7 @@ export default function Fight() {
     setGameLog(
       (prev) =>
         prev +
-        `${crit ? "Critical Hit! " : ""}${
+        `${crit > 1 ? "Critical Hit! " : ""}${
           myPokemon.name.english
         } uses its Special.${effectiveness} It deals ${specialdmg} Damage.\n`
     );
@@ -228,12 +229,12 @@ export default function Fight() {
 
   function enemySpecial() {
     //calculate critchance and damage
-    const crit = Math.random() < enemyPokemon.base.Speed / 200;
-    let specialdmg = crit
-      ? enemyPokemon.base["Sp. Attack"] * enemyPokemon.specialMult * 2 -
-        myPokemon.base["Sp. Defense"]
-      : enemyPokemon.base["Sp. Attack"] * enemyPokemon.specialMult -
-        myPokemon.base["Sp. Defense"];
+    const crit = Math.random() < enemyPokemon.base.Speed / 300 ? 2 : 1;
+    let specialdmg = Math.round(
+      ((baseDmg * enemyPokemon.base["Sp. Attack"]) /
+        myPokemon.base["Sp. Defense"]) *
+        crit
+    );
     //if pokemon is too weak, deal minimal damage
     if (specialdmg <= 0) specialdmg = 2;
     let HP = myPokemon.base.HP - specialdmg;
@@ -272,14 +273,12 @@ export default function Fight() {
     setGameLog(
       (prev) =>
         prev +
-        `${crit ? "Critical Hit! " : ""}${
+        `${crit > 1 ? "Critical Hit! " : ""}${
           enemyPokemon.name.english
         } uses its Special.${effectiveness} It deals ${specialdmg} Damage.\n`
     );
     return HP;
   }
-
-  // function playerEvade() {}
 
   function fightRound(playerChoice) {
     //what does the player do? 0 = attack, 1 = special
@@ -375,6 +374,7 @@ export default function Fight() {
           <button onClick={enemyPokemon ? handleClickResults : null}>
             View Result
           </button>
+          <div className="counter">Round: {round}</div>
         </div>
       )}
 
