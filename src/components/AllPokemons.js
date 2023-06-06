@@ -22,32 +22,30 @@ export default function AllPokemons() {
       let totalCount = 0;
       let results = [];
 
-      if (selectedType.trim() !== "") {
+      if (selectedType.trim() !== "" && selectedType !== "all") {
         url = `https://pokeapi.co/api/v2/type/${selectedType.toLowerCase()}`;
         const response = await fetch(url);
         const data = await response.json();
-        totalCount = data.pokemon.length;
         results = data.pokemon.map((entry) => entry.pokemon);
-      } else if (searchQuery.trim() !== "") {
-        const response = await fetch(url);
-        const data = await response.json();
-        results = data.results.filter((pokemon) =>
-          pokemon.name.includes(searchQuery.toLowerCase())
-        );
-        totalCount = results.length;
       } else {
         const response = await fetch(url);
         const data = await response.json();
         results = data.results;
-        totalCount = data.count;
       }
+
+      if (searchQuery.trim() !== "") {
+        results = results.filter((pokemon) =>
+          pokemon.name.includes(searchQuery.toLowerCase())
+        );
+      }
+
+      totalCount = results.length;
 
       const paginatedResults = results.slice(
         (currentPage - 1) * limit,
         currentPage * limit
       );
 
-      // Fetch and include the image URLs for each Pokémon
       const pokemonsWithImages = await Promise.all(
         paginatedResults.map(async (pokemon) => {
           const response = await fetch(pokemon.url);
@@ -81,7 +79,7 @@ export default function AllPokemons() {
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
-    setCurrentPage(1); // Reset to the first page when a new search query is entered
+    setCurrentPage(1);
   };
 
   const handleTypeChange = (event) => {
@@ -119,9 +117,6 @@ export default function AllPokemons() {
           <option value="dragon">Dragon</option>
           <option value="dark">Dark</option>
           <option value="fairy">Fairy</option>
-          <option value="unknown">Unknown</option>
-          <option value="shadow">Shadow</option>
-          {/* Add more type options as needed */}
         </select>
         <input
           className="pokesearch"
