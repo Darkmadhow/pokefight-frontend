@@ -32,7 +32,7 @@ export default function AllPokemons() {
         const response = await fetch(url);
         const data = await response.json();
         results = data.results.filter((pokemon) =>
-          pokemon.name.startsWith(searchQuery.toLowerCase())
+          pokemon.name.includes(searchQuery.toLowerCase())
         );
         totalCount = results.length;
       } else {
