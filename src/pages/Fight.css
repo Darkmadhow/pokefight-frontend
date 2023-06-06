@@ -1,61 +1,99 @@
-.fightPage{
-    display: flex;
-    flex-direction: column;
+.fightPage {
+  display: flex;
+  flex-direction: column;
 }
 /*--------------- Battlefield Grid ---------------*/
-.battlefield{
-    display:flex;
-    flex-wrap: wrap;
-    /* grid-template-columns: 1fr 1fr; */
-    background-color: lightyellow;
-    background-image: repeating-linear-gradient(
+.battlefield {
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-template-columns: 1fr 1fr; */
+  background-color: lightyellow;
+  background-image: repeating-linear-gradient(
     0deg,
     transparent,
     #ccc5 0.25rem,
     transparent 0.5rem
   );
-    height: 66.6vh;
+  height: 66.6vh;
 }
-.myPokeStats, .enemyPokeStats{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 33.3vh;
-    width: 50%;
+.myPokeStats,
+.enemyPokeStats {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 33.3vh;
+  width: 50%;
 }
-.enemyPokeSprite, .myPokeSprite{
-    width: 50%;
-    /* height: 100%; */
-    height: 33.3vh;
+.enemyPokeSprite,
+.myPokeSprite {
+  width: 50%;
+  /* height: 100%; */
+  height: 33.3vh;
 }
-.battlefield img{
-    object-fit: cover;
-    overflow: visible;
-    height: 100%;
-    width: 100%;
-    max-width: 400px;
-    max-height: 400px;
+.battlefield img {
+  object-fit: cover;
+  overflow: visible;
+  height: 100%;
+  width: 100%;
+  max-width: 400px;
+  max-height: 400px;
 }
 
 /*--------------- Buttons for Player ---------------*/
-.playerActions{
-    display: flex;
-    column-gap: 0.5rem;
-    padding: 0.2rem 1rem;
+.playerActions {
+  display: flex;
+  column-gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #e4000f;
+  background-image: repeating-linear-gradient(
+    182deg,
+    transparent 5%,
+    #ddd4 25%,
+    transparent 40%,
+    transparent 65%,
+    #fff4 80%,
+    transparent 100%
+  );
+  background-size: 100% 6rem;
 }
-.playerActions button{
-    flex-grow: 1;
-    padding: 0.5rem;
-    height: 2rem;
+.playerActions button {
+  flex-grow: 2;
+  padding: 0.5rem;
+  height: 2rem;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: #f2f2f2;
+  color: #333;
+  font-size: 1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
-.playerActions .counter{
-    height: 2rem;
+.playerActions button:hover {
+  background-color: #333;
+  color: #fff;
+  transform: scale(1.02);
+}
+
+.playerActions .counter {
+  flex-grow: 1;
+  height: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Pokemon-Solid;
+  /* color: #ffcb05; */
+  color: white;
+  font-weight: 500;
+  font-size: 1.25rem;
+  /* -webkit-text-stroke: 1px #3466af; */
+  -webkit-text-stroke: 1px #333;
 }
 
 /*--------------- Game Log ---------------*/
-.gameLog{
-    background-color: lightgray;
-    overflow-y: scroll;
-    height: calc(33vh - 2.4rem);
+.gameLog {
+  background-color: lightgray;
+  overflow-y: scroll;
+  height: calc(33vh - 2.4rem);
 }
