@@ -53,7 +53,9 @@ export default function AllPokemons() {
           return {
             id: data.id,
             name: pokemon.name,
-            imageUrl: data.sprites.front_default,
+            imageUrl:
+              data.sprites.other["official-artwork"]?.front_default ||
+              data.sprites.front_default,
           };
         })
       );
