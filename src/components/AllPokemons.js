@@ -10,12 +10,14 @@ export default function AllPokemons() {
   const [totalPages, setTotalPages] = useState(0);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchPokemons();
   }, [currentPage, searchQuery, selectedType]);
 
   const fetchPokemons = async () => {
+    setIsLoading(true);
     try {
       const limit = 9;
       let url = "https://pokeapi.co/api/v2/pokemon?limit=809";
@@ -65,6 +67,7 @@ export default function AllPokemons() {
     } catch (error) {
       console.log("Error fetching pokemons:", error);
     }
+    setIsLoading(false);
   };
 
   const handleNextPage = () => {
@@ -133,19 +136,39 @@ export default function AllPokemons() {
           size="2x"
         />
       </div>
+      {pokemons.length === 0 && searchQuery.trim() !== "" && (
+        <h1 className="no-pokemon">
+          Oops! No pokemon with that name. <br />
+          Try again!
+        </h1>
+      )}
       <div className="pokemon-grid">
-        {pokemons.map((pokemon) => (
-          <Link
-            to={`/pokemon/${pokemon.id}`}
-            key={pokemon.id}
-            className="pokemon-card"
-          >
-            <img src={pokemon.imageUrl} alt={pokemon.name} />
-            <span>
-              {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
-            </span>
-          </Link>
-        ))}
+        {isLoading ? (
+          // Display the overlay spinner while loading
+          <div id="cssload-loader">
+            <div className="cssload-dot"></div>
+            <div className="cssload-dot"></div>
+            <div className="cssload-dot"></div>
+            <div className="cssload-dot"></div>
+            <div className="cssload-dot"></div>
+            <div className="cssload-dot"></div>
+            <div className="cssload-dot"></div>
+            <div className="cssload-dot"></div>
+          </div>
+        ) : (
+          pokemons.map((pokemon) => (
+            <Link
+              to={`/pokemon/${pokemon.id}`}
+              key={pokemon.id}
+              className="pokemon-card"
+            >
+              <img src={pokemon.imageUrl} alt={pokemon.name} />
+              <span>
+                {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+              </span>
+            </Link>
+          ))
+        )}
       </div>
       <div>
         <button
